@@ -4,7 +4,6 @@
  */
 
 var express = require('express');
-var hello = require('./routes/hello');
 var http = require('http');
 var path = require('path');
 var ipban = require('./ipban.js');
@@ -21,7 +20,12 @@ if ('development' == app.get('env')) {
 }
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
+// deprecation warning for multipart
+//If you want to avoid any warning messages, do this instead (which is what connect.bodyParser() will be in 3.0):
+// app.use(express.bodyParser());
+app.use(express.urlencoded())
+app.use(express.json())
+// end deprecation warning for multipart
 app.use(express.methodOverride());
 app.use(express.cookieParser('aaaf419dfffac16ec1c5abc496d8c37511950687'));
 app.use(express.session());
@@ -33,16 +37,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', hello.list);
-app.get('/hello/list.json', hello.list_json);
-app.get('/hello/randomjson', hello.random_json);
-app.get('/hello/list', hello.list);
-app.get('/hello/new', hello.create);
-app.get('/hello/del/:id', hello.del);
-app.get('/hello/edit/:id', hello.edit);
-app.post('/hello/add', hello.add);
-app.post('/hello/update', hello.update);
+// Load all routes.
+require('./routes')(app);
 
+// some uglyness, the first rooute in the exports of hello is the list action
+//this changes when a routefile is added with an first letter in [a..g] :)
+app.get('/', app.routes.get[0].callbacks[0]);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

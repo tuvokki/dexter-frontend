@@ -6,5 +6,6 @@ A frontend with expressjs to learn some stuff
 This right now has a simple tutorial setup.
 
 ####Todo's are
-* easy way to create modules
+* more robust way to easy create modules
+* tests
 

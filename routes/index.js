@@ -17,10 +17,12 @@ module.exports = function (app) {
 };
 
 /**
-usage in your app,js
+usage in your app.js
 // Load all routes.
   require('./routes')(app);
+**/
 
+/**
 in your /routes/hello.js
 With that module, creating a new route definition and implementation is really easy. For examples, hello.js:
 
