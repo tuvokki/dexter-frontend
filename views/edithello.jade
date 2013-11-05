@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= title
+    form#formAddHello(name="updatehello",method="post",action="/hello/update")
+        input(name="_id", type="hidden", value=hello._id.toHexString()) 
+        input#inputHelloGreeting(type="text", value=hello.greeting, name="hellogreeting")
+        input#inputHelloRecipient(type="text", value=hello.recipient, name="hellorecipient")
+        button#btnSubmit(type="submit") save

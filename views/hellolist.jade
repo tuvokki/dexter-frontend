@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1.
+    Hello List
+  ul
+    each hello, i in hellolist
+      li
+        span #{hello.greeting} #{hello.recipient} 
+          a(href="/hello/del/" + hello._id.toHexString()) del
+          |
+          a(href="/hello/edit/" + hello._id.toHexString()) edit
+  a(href="/hello/new") new hello
