@@ -8,7 +8,8 @@ var http = require('http');
 var path = require('path');
 var ipban = require('./ipban.js');
 
-var app = express();
+//supertest takes the express app that it will be testing as an argument, therefore we must export our app
+var app = exports.app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3476);
@@ -35,6 +36,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
+  //pretty print html output with tabs and newlines in development
+  app.locals.pretty = true;
 }
 
 // Load all routes.

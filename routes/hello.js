@@ -6,13 +6,13 @@ helloProvider.setCollectionName('greetings');
 var random_json = function(req, res) {
   helloProvider.findAll(function(error, items){
     var rand = items[Math.floor(Math.random() * items.length)];
-    res.send(rand);
+    res.send({hello: rand});
   });
 };
 
 var list_json = function(req, res){
   helloProvider.findAll(function(error, items){
-    res.send(items);
+    res.send({hellos: items});
   });
 };
 
