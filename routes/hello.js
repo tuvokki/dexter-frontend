@@ -21,20 +21,27 @@ var list_json = function(req, res){
 
 var list = function(req, res) {
   helloProvider.findAll(function(error, items){
-      res.render('hello/list', {
-          "basepath": basePath,
-          "hellolist" : items
-      });
+    res.render('hello/list', {
+      "basepath": basePath,
+      "hellolist" : items
+    });
   });
 };
 
 var create = function(req, res){
-  res.render('hello/create', { title: 'Add New hello' });
+  res.render('hello/create', {
+    "basepath": basePath,
+    title: 'Add New hello'
+  });
 };
 
 var edit = function(req, res){
   helloProvider.findById(req.params.id, function (error, item) {
-    res.render('hello/edit', { title: 'Edit hello', hello: item });
+    res.render('hello/edit', {
+      "basepath": basePath,
+      title: 'Edit hello',
+      hello: item
+    });
   });
 };
 
@@ -47,7 +54,7 @@ var update = function (req, res) {
       greeting: helloGreeting,
       recipient: helloRecipient
     }, function( error, docs) {
-      res.redirect(basePath + '/' + moduleName + '/')
+      res.redirect(basePath + '/' + moduleName + '/list')
     });
   });
 };
@@ -60,7 +67,7 @@ var add = function (req, res) {
     greeting: helloGreeting,
     recipient: helloRecipient
   }, function( error, docs) {
-    res.redirect(basePath + '/' + moduleName + '/')
+    res.redirect(basePath + '/' + moduleName + '/list')
   });
 
 };
@@ -69,13 +76,13 @@ var del = function (req, res) {
   console.log("params", req.params);
   var delId = req.params.id;
   helloProvider.delete(delId, function( error, docs) {
-    res.redirect(basePath + '/' + moduleName + '/')
+    res.redirect(basePath + '/' + moduleName + '/list')
   });
 
 };
 
 module.exports = function (app) {
-  app.namespace(basePath, function(){
+  //app.namespace(basePath, function(){
     app.get('/' + moduleName + '/list', list);
     app.get('/' + moduleName + '/new', create);
     app.get('/' + moduleName + '/edit/:id', edit);
@@ -84,5 +91,5 @@ module.exports = function (app) {
     app.get('/' + moduleName + '/random.json', random_json);
     app.post('/' + moduleName + '/add', add);
     app.post('/' + moduleName + '/update', update);
-  });
+  //});
 };

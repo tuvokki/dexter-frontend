@@ -48,6 +48,8 @@ require('./routes')(app);
 //this changes when a routefile is added with an first letter in [a..g] :)
 app.get('/', app.routes.get[0].callbacks[0]);
 
+console.log(app.routes);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
