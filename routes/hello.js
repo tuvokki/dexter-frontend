@@ -76,13 +76,13 @@ var del = function (req, res) {
 
 module.exports = function (app) {
   app.namespace(basePath, function(){
-    app.get('/list', list);
-    app.get('/new', create);
-    app.get('/edit/:id', edit);
-    app.get('/del/:id', del);
-    app.get('/list.json', list_json);
-    app.get('/random.json', random_json);
-    app.post('/add', add);
-    app.post('/update', update);
+    app.get('/' + moduleName + '/list', list);
+    app.get('/' + moduleName + '/new', create);
+    app.get('/' + moduleName + '/edit/:id', edit);
+    app.get('/' + moduleName + '/del/:id', del);
+    app.get('/' + moduleName + '/list.json', list_json);
+    app.get('/' + moduleName + '/random.json', random_json);
+    app.post('/' + moduleName + '/add', add);
+    app.post('/' + moduleName + '/update', update);
   });
 };
