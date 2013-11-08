@@ -8,6 +8,17 @@ var http = require('http');
 var path = require('path');
 var ipban = require('./ipban.js');
 var namespace = require('express-namespace');
+var passport = require("passport");
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
+
+/**
+Adding passport integration
+
+http://www.scotchmedia.com/tutorials/express/authentication/1/01
+http://bytesofpi.com/post/21137013778/simple-twitter-user-authentication-with-node-js
+**/
 
 //supertest takes the express app that it will be testing as an argument, therefore we must export our app
 var app = exports.app = express();
@@ -31,6 +42,8 @@ app.use(express.json())
 app.use(express.methodOverride());
 app.use(express.cookieParser('aaaf419dfffac16ec1c5abc496d8c37511950687'));
 app.use(express.session());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -47,8 +60,8 @@ require('./routes')(app);
 // some uglyness, the first rooute in the exports of hello is the list action
 //this changes when a routefile is added with an first letter in [a..g] :)
 app.get('/', app.routes.get[0].callbacks[0]);
-
-console.log(app.routes);
+// Add Passport support
+app.post('/auth/local', auth.local);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
