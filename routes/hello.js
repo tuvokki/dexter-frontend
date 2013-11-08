@@ -3,7 +3,8 @@ var DtoProvider = require('../dto/DtoProvider').DtoProvider;
 var helloProvider= new DtoProvider('localhost', 27017, 'asok');
 helloProvider.setCollectionName('greetings');
 
-var basePath = '/backend/hello';
+var basePath = '/backend';
+var moduleName = 'hello';
 
 var random_json = function(req, res) {
   helloProvider.findAll(function(error, items){
@@ -46,7 +47,7 @@ var update = function (req, res) {
       greeting: helloGreeting,
       recipient: helloRecipient
     }, function( error, docs) {
-      res.redirect(basePath + '/')
+      res.redirect(basePath + '/' + moduleName + '/')
     });
   });
 };
@@ -59,7 +60,7 @@ var add = function (req, res) {
     greeting: helloGreeting,
     recipient: helloRecipient
   }, function( error, docs) {
-    res.redirect(basePath + '/')
+    res.redirect(basePath + '/' + moduleName + '/')
   });
 
 };
@@ -68,7 +69,7 @@ var del = function (req, res) {
   console.log("params", req.params);
   var delId = req.params.id;
   helloProvider.delete(delId, function( error, docs) {
-    res.redirect(basePath + '/')
+    res.redirect(basePath + '/' + moduleName + '/')
   });
 
 };
