@@ -7,6 +7,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var ipban = require('./ipban.js');
+var namespace = require('express-namespace');
 
 //supertest takes the express app that it will be testing as an argument, therefore we must export our app
 var app = exports.app = express();

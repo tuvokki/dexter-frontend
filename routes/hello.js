@@ -71,12 +71,14 @@ var del = function (req, res) {
 };
 
 module.exports = function (app) {
-  app.get('/hello/list', list);
-  app.get('/hello/new', create);
-  app.get('/hello/edit/:id', edit);
-  app.get('/hello/del/:id', del);
-  app.get('/hello/list.json', list_json);
-  app.get('/hello/random.json', random_json);
-  app.post('/hello/add', add);
-  app.post('/hello/update', update);
+  app.namespace('/backend/hello', function(){
+    app.get('/list', list);
+    app.get('/new', create);
+    app.get('/edit/:id', edit);
+    app.get('/del/:id', del);
+    app.get('/list.json', list_json);
+    app.get('/random.json', random_json);
+    app.post('/add', add);
+    app.post('/update', update);
+  });
 };
