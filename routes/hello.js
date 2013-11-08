@@ -21,6 +21,7 @@ var list_json = function(req, res){
 var list = function(req, res) {
   helloProvider.findAll(function(error, items){
       res.render('hello/list', {
+          "basepath": basePath,
           "hellolist" : items
       });
   });
