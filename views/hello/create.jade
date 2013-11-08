@@ -2,7 +2,7 @@ extends ../index
 
 block content
     h1= title
-    form#formAddHello(name="addhello",method="post",action="/hello/add")
+    form#formAddHello(name="addhello",method="post",action=basepath + "/hello/add")
         input#inputHelloGreeting(type="text", placeholder="greeting", name="hellogreeting")
         input#inputHelloRecipient(type="text", placeholder="recipient", name="hellorecipient")
         button#btnSubmit(type="submit") add
