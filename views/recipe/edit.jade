@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    h1= title
+    form#formAddRecipe(name="updaterecipe",method="post",action="/recipe/update")
+        input(name="_id", type="hidden", value=recipe._id.toHexString()) 
+        input#inputRecipeGreeting(type="text", value=recipe.greeting, name="recipegreeting")
+        input#inputRecipeRecipient(type="text", value=recipe.recipient, name="reciperecipient")
+        button#btnSubmit(type="submit") save
