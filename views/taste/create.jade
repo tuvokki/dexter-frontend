@@ -1,0 +1,8 @@
+extends ../layout
+
+block content
+  h1= title
+  form#formAddTaste(name="addtaste",method="post",action="/taste/add")
+    input#inputTasteValue(type="text", placeholder="value", name="tastevalue")
+    input#inputTasteLabel(type="text", placeholder="label", name="tastelabel")
+    button#btnSubmit(type="submit") add

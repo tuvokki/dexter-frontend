@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  h1.
+    Taste List
+  ul
+    each taste, i in tastelist
+      li
+        span #{taste.label} [#{taste.value}] 
+          a(href="/taste/del/" + taste._id.toHexString()) del
+  a(href="/taste/new") new taste
