@@ -2,8 +2,66 @@ extends ../layout
 
 block content
     h1= title
-    form#formAddRecipe(name="updaterecipe",method="post",action="/recipe/update")
-        input(name="_id", type="hidden", value=recipe._id.toHexString()) 
-        input#inputRecipeGreeting(type="text", value=recipe.greeting, name="recipegreeting")
-        input#inputRecipeRecipient(type="text", value=recipe.recipient, name="reciperecipient")
-        button#btnSubmit(type="submit") save
+    .reformed-form
+      form#Recipeform(method='post', name='Recipeform', action='/recipe/update')
+        fieldset#metadatafieldset.metadata
+          legend Metadata
+          dl
+            dt
+              label(for='titlefield') Title
+            dd
+              input#titlefield.metadata(type='text', name='recipe[title]', value=recipe.title)
+          dl
+            dt
+              label(for='descriptionfield') Description
+            dd
+              textarea#descriptionfield.metadata(name='recipe[description]', rows='5', cols='70')= recipe.description
+          dl
+            dt
+              label(for='time_requiredfield') Time required
+            dd
+              input#time_requiredfield.metadata(type='text', name='recipe[time_required]', value=recipe.time_required)
+          dl
+            dt
+              label(for='tastefield') Taste
+            dd
+              select#tastefield.metadata(size='1', name='recipe[taste]', selected=recipe.taste)
+                optgroup(label='Select')
+                  option(value='Hot') Hot
+                  option(value='Spicy') Spicy
+                  option(value='Normal') Normal
+                  option(value='Fresh') Fresh
+          dl
+            dt
+              label(for='own_recipefield') Own recipe
+            dd
+              input#own_recipefield.metadata(type='checkbox', name='recipe[own_recipe]', value=recipe.own_recipe)
+              label yes
+        fieldset#ingredientsfieldset.ingredients
+          legend Ingredients
+          dl
+            dt
+              label(for='ingredient_1field') Ingredient 1
+            dd
+              input#ingredient_1field.ingredients(type='text', name='recipe[ingredient_1]', value=recipe.ingredient_1)
+        fieldset#instructionsfieldset.instructions
+          legend Instructions
+          dl
+            dt
+              label(for='preparationfield') Preparation
+            dd
+              textarea#preparationfield.instructions(name='recipe[preparation]', rows='5', cols='70')= recipe.preparation
+          dl
+            dt
+              label(for='instructionsfield') Instructions
+            dd
+              textarea#instructionsfield.instructions(name='recipe[instructions]', rows='5', cols='70')= recipe.instructions
+          dl
+            dt
+              label(for='remarksfield') Remarks
+            dd
+              textarea#remarksfield.instructions(name='recipe[remarks]', rows='5', cols='70')= recipe.remarks
+        input(name="_id", type="hidden", value=id) 
+        #submit_buttons
+          button(type='reset') Reset
+          button(type='submit') Submit

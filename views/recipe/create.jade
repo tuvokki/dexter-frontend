@@ -2,17 +2,65 @@ extends ../layout
 
 block content
   h1= title
-  form#formAddRecipe(action='/recipe/add', method='post')
-    .control-group
-      label.control-label(for='message_name') Your Name
-      .controls
-        input#message_name.input-xxlarge(type='text', placeholder='Name', name='message[name]')
-    .control-group
-      label.control-label(for='message_email') Email
-      .controls
-        input#message_email.input-xxlarge(type='text', placeholder='Email', name='message[email]')
-    .control-group
-      label.control-label(for='message_message') Message
-      .controls
-        textarea#message_message.input-xxlarge(placeholder='Enter message', rows='6', name='message[message]')
-    button.btn(type='submit') Send Message
+  .reformed-form
+    form#Recipeform(method='post', name='Recipeform', action='/recipe/add')
+      fieldset#metadatafieldset.metadata
+        legend Metadata
+        dl
+          dt
+            label(for='titlefield') Title
+          dd
+            input#titlefield.metadata(type='text', name='recipe[title]', value='title')
+        dl
+          dt
+            label(for='descriptionfield') Description
+          dd
+            textarea#descriptionfield.metadata(name='recipe[description]', rows='5', cols='70')
+        dl
+          dt
+            label(for='time_requiredfield') Time required
+          dd
+            input#time_requiredfield.metadata(type='text', name='recipe[time_required]')
+        dl
+          dt
+            label(for='tastefield') Taste
+          dd
+            select#tastefield.metadata(size='1', name='recipe[taste]')
+              optgroup(label='Select')
+                option(value='Hot') Hot
+                option(value='Spicy') Spicy
+                option(value='Normal') Normal
+                option(value='Fresh') Fresh
+        dl
+          dt
+            label(for='own_recipefield') Own recipe
+          dd
+            input#own_recipefield.metadata(type='checkbox', name='recipe[own_recipe]', value='true')
+            label yes
+      fieldset#ingredientsfieldset.ingredients
+        legend Ingredients
+        dl
+          dt
+            label(for='ingredient_1field') Ingredient&UnderBar;1
+          dd
+            input#ingredient_1field.ingredients(type='text', name='recipe[ingredient_1]')
+      fieldset#instructionsfieldset.instructions
+        legend Instructions
+        dl
+          dt
+            label(for='preparationfield') Preparation
+          dd
+            textarea#preparationfield.instructions(name='recipe[preparation]', rows='5', cols='70')
+        dl
+          dt
+            label(for='instructionsfield') Instructions
+          dd
+            textarea#instructionsfield.instructions(name='recipe[instructions]', rows='5', cols='70')
+        dl
+          dt
+            label(for='remarksfield') Remarks
+          dd
+            textarea#remarksfield.instructions(name='recipe[remarks]', rows='5', cols='70')
+      #submit_buttons
+        button(type='reset') Reset
+        button(type='submit') Submit

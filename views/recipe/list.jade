@@ -2,12 +2,12 @@ extends ../layout
 
 block content
   h1.
-    Hello List
+    Recipe List
   ul
-    each hello, i in hellolist
+    each recipe, i in recipelist
       li
-        span #{hello.greeting} #{hello.recipient} 
-          a(href="/hello/del/" + hello._id.toHexString()) del
+        span #{recipe.recipe.title} (#{recipe.recipe.time_required} minutes) 
+          a(href="/recipe/del/" + recipe._id.toHexString()) del
           |
-          a(href="/hello/edit/" + hello._id.toHexString()) edit
-  a(href="/hello/new") new hello
+          a(href="/recipe/edit/" + recipe._id.toHexString()) edit
+  a(href="/recipe/new") new recipe

@@ -30,42 +30,31 @@ var create = function(req, res){
 
 var edit = function(req, res){
   recipeProvider.findById(req.params.id, function (error, item) {
-    res.render('recipe/edit', { title: 'Edit recipe', recipe: item });
+    res.render('recipe/edit', { title: 'Edit recipe', recipe: item.recipe, id: item._id.toHexString() });
   });
 };
 
 var update = function (req, res) {
-  var recipeGreeting = req.body.recipegreeting;
-  var recipeRecipient = req.body.reciperecipient;
-
+  console.log("req.body", req.body);
   recipeProvider.findById(req.param('_id'), function (error, item) {
-    recipeProvider.update(req.param('_id'), {
-      greeting: recipeGreeting,
-      recipient: recipeRecipient
-    }, function( error, docs) {
-      res.redirect('/')
+    recipeProvider.update(req.param('_id'), { recipe: req.body.recipe, created_at: item.created_at, modified_at: new Date() }, function( error, docs) {
+      res.redirect('/recipe/list')
     });
   });
 };
 
 var add = function (req, res) {
   // Get our form values. These rely on the "name" attributes
-  var recipeGreeting = req.body.recipegreeting;
-  var recipeRecipient = req.body.reciperecipient;
-  recipeProvider.save({
-    greeting: recipeGreeting,
-    recipient: recipeRecipient
-  }, function( error, docs) {
-    res.redirect('/')
+  recipeProvider.save(req.body, function( error, docs) {
+    res.redirect('/recipe/list')
   });
 
 };
 
 var del = function (req, res) {
-  console.log("params", req.params);
   var delId = req.params.id;
   recipeProvider.delete(delId, function( error, docs) {
-    res.redirect('/')
+    res.redirect('/recipe/list')
   });
 
 };
