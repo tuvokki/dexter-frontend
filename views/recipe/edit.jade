@@ -25,17 +25,14 @@ block content
             dt
               label(for='tastefield') Taste
             dd
-              select#tastefield.metadata(size='1', name='recipe[taste]', selected=recipe.taste)
-                optgroup(label='Select')
-                  option(value='Hot') Hot
-                  option(value='Spicy') Spicy
-                  option(value='Normal') Normal
-                  option(value='Fresh') Fresh
+              select#tastefield.metadata(size='1', name='recipe[taste]')
+                each tasteoption in tasteoptions
+                  option(value=tasteoption.value, selected=(recipe.taste==tasteoption.value))= tasteoption.label 
           dl
             dt
               label(for='own_recipefield') Own recipe
             dd
-              input#own_recipefield.metadata(type='checkbox', name='recipe[own_recipe]', value=recipe.own_recipe)
+              input#own_recipefield.metadata(type='checkbox', name='recipe[own_recipe]', checked=recipe.own_recipe)
               label yes
         fieldset#ingredientsfieldset.ingredients
           legend Ingredients

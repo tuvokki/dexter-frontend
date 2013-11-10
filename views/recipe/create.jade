@@ -26,11 +26,9 @@ block content
             label(for='tastefield') Taste
           dd
             select#tastefield.metadata(size='1', name='recipe[taste]')
-              optgroup(label='Select')
-                option(value='Hot') Hot
-                option(value='Spicy') Spicy
-                option(value='Normal') Normal
-                option(value='Fresh') Fresh
+              option(value="") -- Select Taste --
+              each tasteoption in tasteoptions
+                option(value=tasteoption.value)= tasteoption.label 
         dl
           dt
             label(for='own_recipefield') Own recipe

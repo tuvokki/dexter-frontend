@@ -24,13 +24,22 @@ var list = function(req, res) {
   });
 };
 
+//TODO: fetch from database
+var tasteoptions = [
+  { value: 'Hot', label: 'Hot' },
+  { value: 'Spicy', label: 'Spicy' },
+  { value: 'Normal', label: 'Normal' },
+  { value: 'Cool', label: 'Cool' },
+  { value: 'Fresh', label: 'Fresh' }
+]
+
 var create = function(req, res){
-  res.render('recipe/create', { title: 'Add New recipe' });
+  res.render('recipe/create', { title: 'Add New recipe', tasteoptions: tasteoptions });
 };
 
 var edit = function(req, res){
   recipeProvider.findById(req.params.id, function (error, item) {
-    res.render('recipe/edit', { title: 'Edit recipe', recipe: item.recipe, id: item._id.toHexString() });
+    res.render('recipe/edit', { title: 'Edit recipe', recipe: item.recipe, id: item._id.toHexString(), tasteoptions: tasteoptions });
   });
 };
 
