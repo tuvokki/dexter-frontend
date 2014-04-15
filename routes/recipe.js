@@ -52,6 +52,7 @@ var update = function (req, res) {
 };
 
 var add = function (req, res) {
+  console.log("req.body", req.body);
   // Get our form values. These rely on the "name" attributes
   recipeProvider.save(req.body, function( error, docs) {
     res.redirect('/recipe/list')

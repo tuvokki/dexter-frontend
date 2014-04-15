@@ -39,9 +39,22 @@ block content
         legend Ingredients
         dl
           dt
-            label(for='ingredient_1field') Ingredient&UnderBar;1
+            label(for='ingredientfield') Ingredient
           dd
-            input#ingredient_1field.ingredients(type='text', name='recipe[ingredient_1]')
+            input#ingredientfield.ingredients(type='text', name='recipe[ingredients[][ingredient]')
+          dt
+            label(for='ingredientfield') Ingredient
+          dd
+            input#ingredientfield.ingredients(type='text', name='recipe[ingredients[][ingredient]')
+          dt
+            label(for='ingredientfield') Ingredient
+          dd
+            input#ingredientfield.ingredients(type='text', name='recipe[ingredients[][ingredient]')
+          dt
+            label(for='ingredientfield') Ingredient
+          dd
+            input#ingredientfield.ingredients(type='text', name='recipe[ingredients[][ingredient]')
+        button(id='addingredient') Add ingredient
       fieldset#instructionsfieldset.instructions
         legend Instructions
         dl
@@ -62,3 +75,5 @@ block content
       #submit_buttons
         button(type='reset') Reset
         button(type='submit') Submit
+
+  script(src='/javascripts/create_add_ingredient.js')
