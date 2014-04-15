@@ -9,3 +9,4 @@ This right now has borrowed some stuff from the [asok-backend](https://github.co
 * more robust way to easy create modules
 * expand tests also for the POST routes
 
+![image](https://www.codeship.io/projects/86fafc80-a6f8-0131-c660-26855b373a72/status)
